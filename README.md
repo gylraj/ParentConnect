@@ -83,7 +83,7 @@ To get a local copy of the app up and running, follow these steps.
 
 ## 🎥 Screen Recording
 
-![🎥](https://github.com/user-attachments/assets/e85609e4-e0b1-4170-96c3-b9edb5a26495)
+[🎥 Screen Recording](https://github.com/user-attachments/assets/e85609e4-e0b1-4170-96c3-b9edb5a26495)
 
 ## 🔧 API Endpoints
 
