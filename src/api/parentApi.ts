@@ -22,8 +22,6 @@ export const fetchParent = async ({
   try {
     const numericPhoneNumber = removeNonNumeric(phoneNumber);
 
-    console.log('numericPhoneNumber', numericPhoneNumber);
-
     const parents = await fetchParents();
     return parents.find(
       (parent: { phone_number: string; pin: string; id: string }) =>

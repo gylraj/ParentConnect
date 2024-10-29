@@ -28,7 +28,6 @@ const LoginScreen = () => {
   const handleLogin = async () => {
     setProcessing(true);
     try {
-      console.log('phoneNumber, pin', { phoneNumber, pin });
       const parent = await fetchParent({ phoneNumber, pin });
       setProcessing(false);
 
