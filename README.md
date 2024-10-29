@@ -77,9 +77,9 @@ To get a local copy of the app up and running, follow these steps.
 
 ## 📱 Screenshots
 
-| Login Screen                        | Student List                               | Student Details                                 |
-| ----------------------------------- | ------------------------------------------ | ----------------------------------------------- |
-| ![Login Screen](./assets/icon2.png) | ![Student List](./assets/student_list.png) | ![Student Details](./assets/student_detail.png) |
+| Login Screen                                                                                     | Student List                                                                                     | Student Details                                                                                     |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
+| ![Login Screen](https://github.com/user-attachments/assets/31c0f1c2-5ed7-46c3-9f94-44735a932953) | ![Student List](https://github.com/user-attachments/assets/d22ad556-b1e0-4b11-9e8d-4f8fd9b61eb2) | ![Student Details](https://github.com/user-attachments/assets/9ff1cee3-d212-4f26-a27b-a8c6aa1d98d8) |
 
 ## 🔧 API Endpoints
 
