@@ -50,9 +50,6 @@ const StudentListScreen = () => {
 
   return (
     <View style={tw`flex-1 bg-gray-100`}>
-      <Text style={tw`text-2xl font-bold text-center text-gray-800 py-4`}>
-        Students
-      </Text>
       {error && <Text style={tw`text-red-500 mt-4`}>{error}</Text>}
       <FlatList
         data={students}
@@ -66,7 +63,7 @@ const StudentListScreen = () => {
             </View>
           </TouchableOpacity>
         )}
-        contentContainerStyle={tw`px-4 pb-4`}
+        contentContainerStyle={tw`px-4 pb-4 py-4`}
       />
     </View>
   );
