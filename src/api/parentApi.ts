@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { removeNonNumeric } from '../utils/helper';
 import apiClient from './apiClient';
 
@@ -34,7 +33,7 @@ export const fetchParent = async ({
   }
 };
 
-export const fetchStudents = async (parentId: string) => {
+export const fetchStudentList = async (parentId: string) => {
   try {
     const response = await apiClient.get(`/parent/${parentId}/student`);
     return response.data;

@@ -16,9 +16,21 @@ const Stack = createStackNavigator<RootStackParamList>();
 
 const RootNavigator = () => (
   <Stack.Navigator initialRouteName="Login">
-    <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
-    <Stack.Screen name="StudentList" component={StudentListScreen} options={{ title: 'Students' }} />
-    <Stack.Screen name="StudentDetail" component={StudentDetailScreen} options={{ title: 'Student Details' }} />
+    <Stack.Screen
+      name="Login"
+      component={LoginScreen}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name="StudentList"
+      component={StudentListScreen}
+      options={{ title: 'Students' }}
+    />
+    <Stack.Screen
+      name="StudentDetail"
+      component={StudentDetailScreen}
+      options={{ title: 'Student Details' }}
+    />
   </Stack.Navigator>
 );
 

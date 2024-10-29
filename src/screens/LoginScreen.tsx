@@ -4,48 +4,42 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  ActivityIndicator,
   Alert,
+  ActivityIndicator,
 } from 'react-native';
-import { useNavigation, NavigationProp } from '@react-navigation/native';
-import axios from 'axios';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { login } from '../../redux/slices/authSlice';
 import tw from 'twrnc';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../navigation/RootNavigator';
 import PinInput from '../components/PinInput';
-import { fetchParent, fetchParents } from '../api/parentApi';
 
 const LoginScreen = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [pin, setPin] = useState('');
-  const [processing, setProcessing] = useState(false);
-
+  const dispatch = useAppDispatch();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const { loading, error, isAuthenticated, parentId } = useAppSelector(
+    state => state.auth
+  );
 
   const handlePinChange = (newPin: string) => {
     setPin(newPin);
   };
 
-  const handleLogin = async () => {
-    setProcessing(true);
-    try {
-      const parent = await fetchParent({ phoneNumber, pin });
-      setProcessing(false);
-
-      if (parent) {
-        navigation.navigate('StudentList', { parentId: parent.id });
-      } else {
-        Alert.alert(
-          'Invalid Credentials',
-          'Please check your mobile number or PIN.'
-        );
-      }
-    } catch (error) {
-      setProcessing(false);
-      Alert.alert('Error', 'Failed to authenticate. Please try again later.');
-    }
+  const handleLogin = () => {
+    dispatch(login({ phoneNumber, pin }))
+      .unwrap()
+      .then((id: string) => {
+        // Navigate to StudentList screen on successful login
+        navigation.navigate('StudentList', { parentId: id });
+      })
+      .catch(error => {
+        Alert.alert('Login Failed', error);
+      });
   };
 
-  const isDisabled = pin.length !== 4 || !phoneNumber || processing;
+  const isDisabled = pin.length !== 4 || !phoneNumber || loading;
 
   return (
     <View style={tw`flex-1 justify-center items-center px-6`}>
@@ -74,12 +68,13 @@ const LoginScreen = () => {
         ]}
         disabled={isDisabled}
       >
-        {processing ? (
+        {loading ? (
           <ActivityIndicator color="#FFF" />
         ) : (
           <Text style={tw`text-white text-lg font-bold`}>LOGIN</Text>
         )}
       </TouchableOpacity>
+      {error && <Text style={tw`text-red-500 mt-4`}>{error}</Text>}
     </View>
   );
 };

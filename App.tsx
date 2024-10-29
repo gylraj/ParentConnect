@@ -6,6 +6,8 @@ import * as SplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
 import Entypo from '@expo/vector-icons/Entypo';
 import { View } from 'react-native';
+import { Provider } from 'react-redux';
+import store from './redux/store';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -47,9 +49,11 @@ const App = () => {
   }
   return (
     <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
-      <NavigationContainer>
-        <RootNavigator />
-      </NavigationContainer>
+      <Provider store={store}>
+        <NavigationContainer>
+          <RootNavigator />
+        </NavigationContainer>
+      </Provider>
     </View>
   );
 };
