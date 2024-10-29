@@ -15,7 +15,7 @@ ParentConnect is your go-to app for staying connected to your child's school act
 ## 🛠️ Technologies Used
 
 - **Frontend**: React Native, TypeScript
-- **State Management**: Default React State Management
+- **State Management**: Redux & Redux Trunk
 - **UI**: Tailwind CSS for React Native (via twrnc)
 - **Navigation**: React Navigation
 - **API**: MockAPI for testing and data storage
