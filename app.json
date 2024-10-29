@@ -1,20 +1,22 @@
 {
   "expo": {
     "name": "ParentConnect",
-    "slug": "ParentConnect",
+    "slug": "parent-connect",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/icon2.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/splash2.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "ios": {
+      "bundleIdentifier": "dev.gylou.parentconnect",
       "supportsTablet": true
     },
     "android": {
+      "package": "dev.gylou.parentconnect",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -22,6 +24,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "plugins": ["expo-font"],
+    "extra": {
+      "eas": {
+        "projectId": "0877160f-4a44-4c25-bd48-e4042a0a79d4"
+      }
     }
   }
 }

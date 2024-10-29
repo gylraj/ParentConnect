@@ -1,0 +1,8 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit", // Enables fixing all auto-fixable problems
+    "source.fixAll.eslint": "explicit" // Specifically for ESLint auto-fixes
+  }
+}
