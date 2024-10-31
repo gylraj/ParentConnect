@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import {
   View,
   Text,
@@ -13,9 +13,10 @@ import {
   NavigationProp,
 } from '@react-navigation/native';
 import tw from 'twrnc';
-import { fetchStudents } from '../api/parentApi';
 import { RootStackParamList } from '../navigation/RootNavigator';
-import { Student } from '../types/Student';
+import { RootState } from '../../redux/store';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { fetchStudents } from '../../redux/slices/studentSlice';
 
 type RouteParams = {
   StudentList: { parentId: string };
@@ -24,25 +25,16 @@ type RouteParams = {
 const StudentListScreen = () => {
   const route = useRoute<RouteProp<RouteParams, 'StudentList'>>();
   const { parentId } = route.params;
+  const dispatch = useAppDispatch();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
-  const [students, setStudents] = useState<Student[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { students, loading, error } = useAppSelector(
+    (state: RootState) => state.student
+  );
 
   useEffect(() => {
-    const loadStudents = async () => {
-      try {
-        const data = await fetchStudents(parentId);
-        setStudents(data);
-      } catch (error) {
-        console.error('Error loading students:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadStudents();
-  }, [parentId]);
+    dispatch(fetchStudents(parentId));
+  }, [dispatch, parentId]);
 
   const handleStudentPress = (studentId: string) => {
     navigation.navigate('StudentDetail', { studentId });
@@ -58,9 +50,7 @@ const StudentListScreen = () => {
 
   return (
     <View style={tw`flex-1 bg-gray-100`}>
-      <Text style={tw`text-2xl font-bold text-center text-gray-800 py-4`}>
-        Students
-      </Text>
+      {error && <Text style={tw`text-red-500 mt-4`}>{error}</Text>}
       <FlatList
         data={students}
         keyExtractor={item => item.id.toString()}
@@ -73,7 +63,7 @@ const StudentListScreen = () => {
             </View>
           </TouchableOpacity>
         )}
-        contentContainerStyle={tw`px-4 pb-4`}
+        contentContainerStyle={tw`px-4 pb-4 py-4`}
       />
     </View>
   );

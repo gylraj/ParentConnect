@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { View, Text, ActivityIndicator } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';
-import axios from 'axios';
 import tw from 'twrnc';
 import { RootStackParamList } from '../navigation/RootNavigator';
-import { Student } from '../types/Student';
-import { fetchStudent } from '../api/studentApi';
+import { useAppSelector } from '../../redux/hooks';
 
 type StudentDetailScreenRouteProp = RouteProp<
   RootStackParamList,
@@ -15,23 +13,13 @@ type StudentDetailScreenRouteProp = RouteProp<
 const StudentDetailScreen = () => {
   const route = useRoute<StudentDetailScreenRouteProp>();
   const { studentId } = route.params;
-  const [student, setStudent] = useState<Student | null>(null);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchStudentInfo = async () => {
-      try {
-        const fetchedStudent = await fetchStudent(studentId);
-        setStudent(fetchedStudent);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const { students, loading, error } = useAppSelector(state => state.student);
 
-    fetchStudentInfo();
-  }, [studentId]);
+  const student = useMemo(
+    () => students.find(item => item.id == studentId),
+    [studentId]
+  );
 
   if (loading) {
     return (
@@ -48,7 +36,7 @@ const StudentDetailScreen = () => {
     return (
       <View style={tw`flex-1 justify-center items-center`}>
         <Text style={tw`text-lg text-red-500`}>
-          Failed to load student data.
+          Failed to load student data. {error}
         </Text>
       </View>
     );

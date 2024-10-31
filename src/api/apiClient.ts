@@ -1,5 +1,4 @@
 import axios from 'axios';
-console.log('process.env.EXPO_PUBLIC_API_URL', process.env.EXPO_PUBLIC_API_URL);
 
 // Create an Axios instance with default configuration
 const apiClient = axios.create({
