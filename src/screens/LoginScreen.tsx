@@ -28,15 +28,8 @@ const LoginScreen = () => {
   };
 
   const handleLogin = () => {
-    dispatch(login({ phoneNumber, pin }))
-      .unwrap()
-      .then((id: string) => {
-        // Navigate to StudentList screen on successful login
-        navigation.navigate('StudentList', { parentId: id });
-      })
-      .catch(error => {
-        Alert.alert('Login Failed', error);
-      });
+    Alert.alert('Login Failed', process.env.EXPO_PUBLIC_API_URL);
+    return;
   };
 
   const isDisabled = pin.length !== 4 || !phoneNumber || loading;
